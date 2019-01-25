@@ -2,6 +2,9 @@
   "name": "revents",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "10.3.0"
+  },
   "dependencies": {
     "cuid": "^2.1.1",
     "date-fns": "^1.29.0",
