@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Form, Label } from "semantic-ui-react";
-import Script from "react-load-script";
-import PlacesAutocomplete from "react-places-autocomplete";
+import React, { Component } from 'react';
+import { Form, Label } from 'semantic-ui-react';
+import Script from 'react-load-script';
+import PlacesAutocomplete from 'react-places-autocomplete';
 
 const styles = {
-    autocompleteContainer: {
-        zIndex: 1000
-    } 
+  autocompleteContainer: {
+    zIndex: 1000
+  }
 }
 
 class PlaceInput extends Component {
@@ -14,10 +14,7 @@ class PlaceInput extends Component {
     scriptLoaded: false
   };
 
-  handleScriptLoaded = () =>
-    this.setState({
-      scriptLoaded: true
-    });
+  handleScriptLoaded = () => this.setState({ scriptLoaded: true });
 
   render() {
     const {
@@ -42,15 +39,15 @@ class PlaceInput extends Component {
             styles={styles}
           />
         )}
-        {touched && error && (
-          <Label basic color="red">
-            {error}
-          </Label>
-        )}
+        {touched &&
+          error && (
+            <Label basic color="red">
+              {error}
+            </Label>
+          )}
       </Form.Field>
     );
   }
 }
 
 export default PlaceInput;
-//<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlTz80tIhmCTuQXEoSv-CCCq2p2wAVxws&libraries=places"></script>
