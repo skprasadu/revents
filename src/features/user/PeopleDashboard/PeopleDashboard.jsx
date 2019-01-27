@@ -1,9 +1,9 @@
 import React from 'react'
 
-function PeopleDashboard() {
+const PeopleDashboard = () => {
   return (
     <div>
-      <h2> People Dashboard</h2>
+      <h1>People Dashboard</h1>
     </div>
   )
 }

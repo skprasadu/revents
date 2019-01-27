@@ -1,9 +1,9 @@
 import React from 'react'
 
-function BasicPage() {
+const BasicPage = () => {
   return (
     <div>
-      <h2>Basic Page</h2>
+      <h1>Basic Page</h1>
     </div>
   )
 }
