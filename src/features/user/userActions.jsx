@@ -124,7 +124,7 @@ export const goingToEvent = event => async (
   const attendee = {
     going: true,
     joinDate: Date.now(),
-    photoURL: photoURL,
+    photoURL: photoURL || '/assets/user.png',
     displayName: user.displayName,
     host: false
   };
@@ -144,5 +144,25 @@ export const goingToEvent = event => async (
   } catch (error) {
     console.log(error);
     toastr.error("Opps", "problem signing up to events");
+  }
+};
+
+export const cancelGoingToEvent = event => async (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore();
+  const user = firestore.auth().currentUser;
+
+  try {
+    await firestore.update(`events/${event.id}`, {
+      [`attendees.${user.uid}`]: firestore.FieldValue.delete()
+    });
+    await firestore.delete(`event_attendee/${event.id}_${user.uid}`);
+    toastr.success("Success", "you have removed yourself");
+  } catch (error) {
+    console.log(error);
+    toastr.error("Oops", "something went wrong");
   }
 };

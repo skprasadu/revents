@@ -6,11 +6,10 @@ import EventDetailedHeader from "./EventDetailedHeader";
 import EventDetailedInfo from "./EventDetailedInfo";
 import EventDetailedChat from "./EventDetailedChat";
 import EventDetailedSidebar from "./EventDetailedSidebar";
-import { objectToArray } from '../../../app/common/util/helpers'
-import { goingToEvent } from '../../user/userActions'
+import { objectToArray } from "../../../app/common/util/helpers";
+import { goingToEvent, cancelGoingToEvent } from "../../user/userActions";
 
-const mapState = (state) => {
-
+const mapState = state => {
   let event = {};
 
   if (state.firestore.ordered.events && state.firestore.ordered.events[0]) {
@@ -24,11 +23,11 @@ const mapState = (state) => {
 };
 
 const actions = {
-  goingToEvent
-}
+  goingToEvent,
+  cancelGoingToEvent
+};
 
 class EventDetailedPage extends Component {
-
   async componentDidMount() {
     const { firestore, match } = this.props;
     await firestore.setListener(`events/${match.params.id}`);
@@ -40,14 +39,21 @@ class EventDetailedPage extends Component {
   }
 
   render() {
-    const { event, auth, goingToEvent } = this.props;
-    const attendees = event && event.attendees && objectToArray(event.attendees);
+    const { event, auth, goingToEvent, cancelGoingToEvent } = this.props;
+    const attendees =
+      event && event.attendees && objectToArray(event.attendees);
     const isHost = event.hostUid === auth.uid;
-    const isGoing = attendees && attendees.some(a => a.id === auth.uid)
+    const isGoing = attendees && attendees.some(a => a.id === auth.uid);
     return (
       <Grid>
         <Grid.Column width={10}>
-          <EventDetailedHeader event={event} isHost={isHost} isGoing={isGoing} goingToEvent={goingToEvent}/>
+          <EventDetailedHeader
+            event={event}
+            isHost={isHost}
+            isGoing={isGoing}
+            goingToEvent={goingToEvent}
+            cancelGoingToEvent={cancelGoingToEvent}
+          />
           <EventDetailedInfo event={event} />
           <EventDetailedChat />
         </Grid.Column>
@@ -59,4 +65,9 @@ class EventDetailedPage extends Component {
   }
 }
 
-export default withFirestore(connect(mapState, actions)(EventDetailedPage));
+export default withFirestore(
+  connect(
+    mapState,
+    actions
+  )(EventDetailedPage)
+);
