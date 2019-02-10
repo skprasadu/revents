@@ -13,7 +13,7 @@ const panes = [
 const UserDetailedEvents = ({ events, eventsLoading, changeTab }) => {
   return (
     <Grid.Column width={12}>
-      <Segment attached>
+      <Segment attached loading={eventsLoading}>
         <Header icon="calendar" content="Events" />
         <Tab onTabChange={(e, data) => changeTab(e, data)} panes={panes} menu={{ secondary: true, pointing: true }} />
 
