@@ -5,7 +5,6 @@ import {
   asyncActionFinish,
   asyncActionError
 } from "../async/asyncActions";
-//import { fetchSampleData } from "../../app/data/mockAPI";
 import { createNewEvent } from "../../app/common/util/helpers";
 import moment from "moment";
 import firebase from "../../app/config/firebase";
