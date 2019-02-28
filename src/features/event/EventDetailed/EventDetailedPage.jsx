@@ -20,6 +20,7 @@ const mapState = (state, ownProps) => {
 
   return {
     event,
+    loading: state.async.loading,
     auth: state.firebase.auth,
     eventChat:
       !isEmpty(state.firebase.data.event_chat) &&
@@ -46,6 +47,7 @@ class EventDetailedPage extends Component {
 
   render() {
     const {
+      loading,
       event,
       auth,
       goingToEvent,
@@ -62,6 +64,7 @@ class EventDetailedPage extends Component {
       <Grid>
         <Grid.Column width={10}>
           <EventDetailedHeader
+            loading={loading}
             event={event}
             isHost={isHost}
             isGoing={isGoing}
